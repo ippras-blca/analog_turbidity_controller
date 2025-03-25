@@ -1,0 +1,38 @@
+[package]
+name = "analog_turbidity_controller"
+version = "0.1.0"
+authors = ["kgv <kgv@users.noreply.github.com>"]
+edition = "2024"
+
+[[bin]]
+name = "analog_turbidity_controller"
+harness = false # do not use the built in cargo test harness -> resolve rust-analyzer errors
+
+[dependencies]
+anyhow = "1.0.97"
+esp-idf-svc = { version = "0.51.0", features = ["critical-section", "embassy-time-driver", "embassy-sync"] }
+heapless = "0.8.0"
+log = "0.4.27"
+turbidimeter = { git = "https://github.com/ippras-blca/turbidimeter" }
+thiserror = "2.0.12"
+tokio = { version = "1.44.1", features = ["rt", "net", "time", "io-util", "macros"] }
+tokio-modbus = { version = "0.16.1", features = ["tcp-server"] }
+# bincode = "2.0.1"
+# async-channel = "2.3.1"
+# ron = "0.9.0"
+# led = { git = "https://github.com/ippras-blca/led" }
+
+[build-dependencies]
+embuild = "0.33.0"
+
+[features]
+default = []
+
+experimental = ["esp-idf-svc/experimental"]
+
+[profile.release]
+opt-level = "s"
+
+[profile.dev]
+debug = true    # Symbols are nice and they don't increase the size on Flash
+opt-level = "z"
