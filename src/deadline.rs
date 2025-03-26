@@ -11,7 +11,7 @@ pub(super) fn start() {
     spawn(run());
 }
 
-pub(super) async fn run() -> Result<()> {
+async fn run() -> Result<()> {
     let sntp = EspSntp::new_default()?;
     while SyncStatus::Completed != sntp.get_sync_status() {
         debug!("SNTP is not completed, wait {}", SLEEP.as_secs());

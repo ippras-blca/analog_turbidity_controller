@@ -12,9 +12,9 @@ use esp_idf_svc::{
     wifi::WifiEvent,
 };
 use log::{error, info, warn};
-use tokio::{runtime::Builder};
+use tokio::runtime::Builder;
 
-const MAC_ADDRESS: &str = "";
+const _MAC_ADDRESS: &str = "98:25:4a:90:83:fb";
 
 fn main() -> Result<()> {
     link_patches();
@@ -51,13 +51,13 @@ async fn run() -> Result<()> {
     // Start deadline checker
     deadline::start();
     // Start turbidity reader
-    let turbidity_sender = turbidity::run(peripherals.pins.gpio2, peripherals.rmt.channel0)?;
+    let turbidity_sender = turbidity::start(peripherals.adc1, peripherals.pins.gpio1)?;
     // Run modbus server
-    modbus::run(temperature_sender.clone()).await?;
+    modbus::run(turbidity_sender.clone()).await?;
     Ok(())
 }
 
+mod deadline;
 mod modbus;
 mod turbidity;
 mod wifi;
-mod deadline;

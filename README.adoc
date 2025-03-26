@@ -13,7 +13,7 @@ MAC address:       7c:df:a1:61:f1:48
 
 list:: `usbipd list`
 
-[source,shell]
+[source,cmd]
 a2f1b4fa-c685-4e4b-995f-40ad338d4eda  Устройство с последовательным интерфейсом USB (COM6), USB...A
 
 == Oneshot environment setup
