@@ -1,7 +1,7 @@
 [package]
 name = "analog_turbidity_controller"
 version = "0.1.0"
-authors = ["kgv <kgv@users.noreply.github.com>"]
+authors = ["Kazakov Giorgi Vladimirovich", "Sidorov Roman Alexandrovich"]
 edition = "2024"
 
 [[bin]]
